@@ -24,18 +24,19 @@ export const TasksList: React.FC<Props> = ({ tasks, errorMsg, onTaskUpdated, onT
                     <span className="block sm:inline"> {errorMsg}</span>
                 </div>
             )}
-
-            {tasks.reverse().map((task, index) => (
-                <div key={index} className="p-4 border mb-2 bg-white shadow-lg rounded-md">
-                    <h2 className="font-bold text-xl mb-2">{task.name}</h2>
-                    <p className="text-gray-700">Type: {task.type}</p>
-                    <p className="text-gray-700">Time spent: {task.timeSpent} hours</p>
-                    <p className="text-gray-700">Dates: {task.dates.join(', ')}</p>
-                    <p className="text-gray-700">Labels: {task.labels.join(', ')}</p>
-                    <TaskEditor task={task} onTaskUpdated={onTaskUpdated} />
-                    <TaskDeletor task={task} onTaskDeleted={onTaskDeleted} />
-              </div>
-            ))}
+            <ul>
+                {tasks.map((task) => (
+                    <li key={task.id} className="p-4 border mb-2 bg-white shadow-lg rounded-md">
+                        <h2 className="font-bold text-xl mb-2">{task.name}</h2>
+                        <p className="text-gray-700">Type: {task.type}</p>
+                        <p className="text-gray-700">Time spent: {task.timeSpent} hours</p>
+                        <p className="text-gray-700">Dates: {task.dates.join(', ')}</p>
+                        <p className="text-gray-700">Labels: {task.labels.join(', ')}</p>
+                        <TaskEditor task={task} onTaskUpdated={onTaskUpdated} />
+                        <TaskDeletor task={task} onTaskDeleted={onTaskDeleted} />
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

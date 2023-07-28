@@ -56,7 +56,6 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
             reset();
             onTaskAdded();
         } catch (error) {
-            console.error(error);
             setErrorMsg('An error occurred while creating the task.');
             setTimeout(() => setErrorMsg(''), 5000);
         }
@@ -64,15 +63,17 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-            <label className="text-lg font-semibold mb-2">Task Name</label>
+            <label htmlFor="taskName" className="text-lg font-semibold mb-2">Task Name</label>
             <input
+                id="taskName"
                 {...register('name', { required: 'This field is required' })}
                 className="mb-4 p-2 border border-gray-400 rounded-lg"
             />
             {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-            <label className="text-lg font-semibold mb-2">Task Type</label>
+            <label htmlFor='taskType' className="text-lg font-semibold mb-2">Task Type</label>
             <select
+                id="taskType"
                 {...register('type')}
                 className="mb-4 p-2 border border-gray-400 rounded-lg"
             >
@@ -80,28 +81,31 @@ export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
                 <option value="Bug">Bug</option>
             </select>
 
-            <label className="text-lg font-semibold mb-2">
+            <label htmlFor='timeSpent' className="text-lg font-semibold mb-2">
                 Time Spent (in hours)
             </label>
             <input
+                id="timeSpent"
                 {...register('timeSpent', { required: 'This field is required' })}
                 className="mb-4 p-2 border border-gray-400 rounded-lg"
             />
             {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-            <label className="text-lg font-semibold mb-2">
+            <label htmlFor='taskDates' className="text-lg font-semibold mb-2">
                 Dates (comma separated)
             </label>
             <input
+                id="taskDates"
                 {...register('dates', { required: 'This field is required' })}
                 className="mb-4 p-2 border border-gray-400 rounded-lg"
             />
             {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-            <label className="text-lg font-semibold mb-2">
+            <label htmlFor='taskLabels' className="text-lg font-semibold mb-2">
                 Labels (comma separated, maximum 3)
             </label>
             <input
+                id="taskLabels"
                 {...register('labels', { required: 'This field is required' })}
                 className="mb-4 p-2 border border-gray-400 rounded-lg"
             />
