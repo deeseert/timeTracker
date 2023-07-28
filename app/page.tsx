@@ -20,12 +20,24 @@ export default function Page() {
             }
 
             const tasks = await response.json();
-            setTasks(tasks);
+            setTasks(tasks.reverse());
         } catch (error) {
             console.error('An error occurred while fetching tasks.', error);
             setErrorMsg('An error occurred while fetching tasks.');
             setTimeout(() => setErrorMsg(''), 5000);
         }
+    };
+
+    const handleTaskUpdated = (updatedTask: Task) => {
+        setTasks(
+            tasks.map((task) =>
+                task.id === updatedTask.id ? updatedTask : task
+            )
+        );
+    };
+
+    const handleTaskDeleted = (deletedTask: Task) => {
+        setTasks(tasks.filter((task) => task.id !== deletedTask.id));
     };
 
     useEffect(() => {
@@ -38,7 +50,12 @@ export default function Page() {
             <ImportButton onTasksImported={fetchTasks} />
             <ExportButton tasks={tasks} />
             <TaskForm onTaskAdded={fetchTasks} />
-            <TasksList tasks={tasks} errorMsg={errorMsg} />
+            <TasksList
+                tasks={tasks}
+                errorMsg={errorMsg}
+                onTaskUpdated={handleTaskUpdated}
+                onTaskDeleted={handleTaskDeleted}
+            />
         </>
     );
 }

@@ -1,13 +1,17 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { Task } from '../types/Task';
+import TaskEditor from './TaskEditor';
+import TaskDeletor from './TaskDeletor';
 
 type Props = {
     tasks: Task[];
     errorMsg: string;
+    onTaskUpdated: (task: Task) => void;
+    onTaskDeleted: (task: Task) => void;
   }
 
-export const TasksList: React.FC<Props> = ({ tasks, errorMsg }) => {
+export const TasksList: React.FC<Props> = ({ tasks, errorMsg, onTaskUpdated, onTaskDeleted }) => {
 
     return (
         <div className="mt-8">
@@ -28,6 +32,8 @@ export const TasksList: React.FC<Props> = ({ tasks, errorMsg }) => {
                     <p className="text-gray-700">Time spent: {task.timeSpent} hours</p>
                     <p className="text-gray-700">Dates: {task.dates.join(', ')}</p>
                     <p className="text-gray-700">Labels: {task.labels.join(', ')}</p>
+                    <TaskEditor task={task} onTaskUpdated={onTaskUpdated} />
+                    <TaskDeletor task={task} onTaskDeleted={onTaskDeleted} />
               </div>
             ))}
         </div>
