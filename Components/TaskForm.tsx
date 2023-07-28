@@ -12,7 +12,11 @@ type FormData = {
     labels: string;
 };
 
-function TaskForm() {
+type Props = {
+    onTaskAdded: () => void;
+};
+
+export const TaskForm: React.FC<Props> = ({ onTaskAdded }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -50,10 +54,11 @@ function TaskForm() {
             setTimeout(() => setSuccessMsg(''), 5000);
             
             reset();
+            onTaskAdded();
         } catch (error) {
             console.error(error);
             setErrorMsg('An error occurred while creating the task.');
-            setTimeout(() => setSuccessMsg(''), 5000);
+            setTimeout(() => setErrorMsg(''), 5000);
         }
     };
 
@@ -132,4 +137,3 @@ function TaskForm() {
     );
 }
 
-export default TaskForm;

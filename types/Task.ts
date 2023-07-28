@@ -1,6 +1,6 @@
 type TaskType = 'Story' | 'Bug';
 
-interface Task {
+type Task = {
   id: string;
   name: string;
   type: TaskType;
