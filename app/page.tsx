@@ -1,4 +1,7 @@
+import TaskForm from "../Components/TaskForm";
+
 // `app/page.tsx` is the UI for the `/` URL
 export default function Page() {
-    return <h1>Hello, Home page!</h1>;
+    return <TaskForm />
+    // return <h1>Hello Home page</h1>
 }
